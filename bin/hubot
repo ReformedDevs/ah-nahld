@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [[ -f ./bin/hubot.secrets ]]; then
+    . ./bin/hubot.secrets
+  else
+    echo "No login setup, can't start"
+    exit 1
+fi
+
+npm install
+export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
+
+exec node_modules/.bin/hubot --name "ah-nahld" "$@"
